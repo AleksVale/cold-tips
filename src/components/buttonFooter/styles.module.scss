@@ -1,0 +1,15 @@
+.button {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  text-decoration: none;
+  align-items: center;
+  svg {
+    font-size: 1.6rem;
+    transition: transform 0.3s ease; /* Adicione uma transição suave para o efeito */
+    &:hover {
+      transform: scale(1.2); /* Aumenta o ícone em 20% */
+    }
+  }
+}
