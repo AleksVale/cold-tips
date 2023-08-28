@@ -6,7 +6,7 @@ import fortuneTiger from '../../assets/tiger1.webp'
 import mines from '../../assets/mines.webp'
 import spaceman from '../../assets/spaceman.webp'
 import bacboblock from '../../assets/bacboblock.webp'
-import aviatorblock from '../../assets/aviatorblock.webp'
+import aviator from '../../assets/aviator.webp'
 import futblock from '../../assets/futblock.webp'
 import mouse1block from '../../assets/mouse1block.webp'
 import oxblock from '../../assets/oxblock.webp'
@@ -24,10 +24,10 @@ interface CardProps {
 }
 
 const cards: CardProps[] = [
-  { img: fortuneTiger, path: '/fortune' },
+  { img: aviator, path: '/aviator' },
   { img: mines, path: '/mines' },
   { img: spaceman, path: '/spaceman' },
-  { img: bacboblock, path: '/' },
+  { img: fortuneTiger, path: '/' },
 ]
 export function Home() {
   return (
