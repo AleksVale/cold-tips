@@ -14,7 +14,7 @@ export function Footer() {
       justifyContent={'space-between'}
     >
       <ButtonFooter text="BÔNUS" icon="bonus" redirect="/bonus" />
-      <ButtonFooter text="HOME" icon="home" redirect="/home" />
+      <ButtonFooter text="HOME" icon="home" redirect="/" />
       <ButtonFooter text="MENU" icon="menu" redirect="/menu" />
     </Box>
   )

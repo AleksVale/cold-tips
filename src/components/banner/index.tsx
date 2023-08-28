@@ -1,20 +1,11 @@
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import banner from '../../assets/landPic.webp'
 import { Link } from 'react-router-dom'
 import styles from './styles.module.scss'
 import { BiMedal } from 'react-icons/bi'
-import { keyframes } from '@emotion/react'
+import { ButtonAnimated } from '../buttonAnimated'
 
 export function Banner() {
-  const effect = keyframes`
-    0% {
-      transform: scale(1);
-    }    
-    100%{
-      transform: scale(1.2);
-    }
-  `
-
   return (
     <Box display="flex" justifyContent="center" alignItems="center">
       <Box maxWidth={'600px'} margin={4}>
@@ -42,17 +33,7 @@ export function Banner() {
             Faça o upgrade agora para o nosso plano PRO e desbloqueie o acesso a
             os jogos com maior índice de assertividade.
           </Typography>
-          <Button
-            sx={{
-              animation: `${effect} 2s infinite alternate`,
-              my: 2,
-            }}
-            fullWidth={true}
-            variant="contained"
-            color="primary"
-          >
-            Adquirir Plano Pro
-          </Button>
+          <ButtonAnimated text="Adquira o plano PRO" />
         </Box>
       </Box>
     </Box>
