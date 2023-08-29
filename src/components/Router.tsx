@@ -7,6 +7,7 @@ import { InstallIos } from '../Pages/ios'
 import { BonusPage } from '../Pages/bonus'
 import { Aviator } from '../Pages/aviator'
 import { Mines } from '../Pages/mines'
+import { LoginPage } from '../Pages/login'
 
 export function Router() {
   return (
@@ -20,6 +21,7 @@ export function Router() {
         <Route path="/aviator" element={<Aviator />} />
         <Route path="/mines" element={<Mines />} />
       </Route>
+      <Route path="login" element={<LoginPage />} />
     </Routes>
   )
 }
