@@ -79,13 +79,13 @@ export function Home() {
           </Avatar>
           <Typography fontWeight={500}>Instalação do App</Typography>
         </Grid>
-        <Grid item lg={6}>
+        <Grid item lg={6} md={12} xs={12}>
           <Link className={styles.cardInstall} to={'/ios'}>
             <AppleIcon />
             <Typography fontWeight={700}>iOS</Typography>
           </Link>
         </Grid>
-        <Grid item lg={6}>
+        <Grid item lg={6} md={12} xs={12}>
           <Link className={styles.cardInstall} to={'/android'}>
             <AdbIcon />
             <Typography fontWeight={700}>Android</Typography>
