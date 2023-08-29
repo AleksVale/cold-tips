@@ -1,17 +1,100 @@
 import { Box, Button, Grid, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
+import { Board, Cell } from '../../components/board'
+import empty from '../../assets/empty.webp'
+import updated from '../../assets/updated.webp'
 
-export function Aviator() {
-  const [countdown, setCountdown] = useState(120)
-  const [signalText, setSignalText] = useState('')
-  const [signalText2, setSignalText2] = useState('')
-  const [signalTime, setSignalTime] = useState('')
-  const [hasGenerated, setHasGenerated] = useState(false)
-  const [isGenerating, setIsGenerating] = useState(false)
-
-  const textos = ['até 2', 'até 3']
-  const textos2 = ['1,5', '2.0', '1,5', '1,4']
+export function Mines() {
   const [peopleCount, setPeopleCount] = useState(getRandomNumber())
+  const [countdown, setCountdown] = useState('Identificar sinal')
+  const [validUntil, setValidUntil] = useState<string>('--')
+
+  const countdownMinutes = 0
+  const countdownSeconds = 7
+
+  const boardSize = 5
+  const numImages = 5
+
+  useEffect(() => {
+    const now = new Date()
+    const validUntilTime = new Date(now.getTime() + 2 * 60 * 1000)
+
+    const formatter = new Intl.DateTimeFormat('pt-BR', {
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      timeZone: 'America/Sao_Paulo', // Defina o fuso horário correto
+    })
+    const validUntilString = formatter.format(validUntilTime)
+
+    setValidUntil(validUntilString)
+  }, [])
+  function getRandomInt(max: number) {
+    return Math.floor(Math.random() * max)
+  }
+  const [cells, setCells] = useState<Cell[]>([])
+
+  useEffect(() => {
+    const newCells = Array.from(
+      { length: boardSize * boardSize },
+      (_, index) => ({
+        index,
+        imageSrc: empty,
+      }),
+    )
+    setCells(newCells)
+  }, [])
+
+  function updateImages() {
+    const updatedIndexes = new Set<number>()
+    while (updatedIndexes.size < numImages) {
+      const index = getRandomInt(boardSize * boardSize)
+      updatedIndexes.add(index)
+    }
+    const newCells = cells.map((cell, index) =>
+      updatedIndexes.has(index) ? { index, imageSrc: updated } : cell,
+    )
+    setCells(newCells)
+  }
+
+  function startCountdown() {
+    let minutos = countdownMinutes
+    let segundos = countdownSeconds
+
+    const countdownInterval = setInterval(() => {
+      segundos--
+
+      if (segundos < 0) {
+        minutos--
+        segundos = 59
+      }
+
+      const minutosFormatados = minutos < 10 ? '0' + minutos : minutos
+      const segundosFormatados = segundos < 10 ? '0' + segundos : segundos
+
+      setCountdown(`${minutosFormatados}:${segundosFormatados}`)
+
+      if (minutos === 0 && segundos === 0) {
+        clearInterval(countdownInterval)
+        resetGame()
+        setCountdown('Identificar sinal')
+      }
+    }, 1000)
+  }
+
+  // Reset the game by setting all cells to empty
+  function resetGame() {
+    const newCells = cells.map((value) => {
+      return { index: value.index, imageSrc: empty }
+    })
+    setCells(newCells)
+  }
+  const handleSubmitAction = () => {
+    if (countdown !== 'Identificar sinal') return
+    startCountdown()
+    resetGame()
+    updateImages()
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -21,48 +104,8 @@ export function Aviator() {
     return () => clearInterval(interval)
   }, [])
 
-  useEffect(() => {
-    if (countdown > 0) {
-      const timer = setInterval(() => {
-        setCountdown((prevCountdown) => prevCountdown - 1)
-      }, 1000)
-
-      return () => clearInterval(timer)
-    }
-  }, [countdown])
-
   function getRandomNumber() {
     return Math.floor(Math.random() * 20) + 30 // Gera um número entre 100 e 999
-  }
-
-  const iniciarContagem = () => {
-    if (isGenerating) return
-    setIsGenerating(true)
-    let tempo = Math.floor(Math.random() * 5 + 1) * 2
-    const interval = setInterval(() => {
-      if (tempo <= 0) {
-        const indice = Math.floor(Math.random() * textos.length)
-        const texto = textos[indice]
-        const indice2 = Math.floor(Math.random() * textos2.length)
-        const texto2 = textos2[indice2]
-        const agora = new Date()
-        const hora = agora.getHours()
-        let minutos = agora.getMinutes() + 1
-        if (minutos >= 60) {
-          minutos = 0
-        }
-        const horaFormatada = `${hora}h${minutos.toString().padStart(2, '0')}`
-        setSignalTime(horaFormatada)
-        setSignalText(texto)
-        setSignalText2(texto2)
-        setHasGenerated(true)
-        clearInterval(interval)
-        setIsGenerating(false)
-      }
-
-      setCountdown(tempo)
-      tempo -= 1
-    }, 1000)
   }
   return (
     <Box
@@ -83,6 +126,7 @@ export function Aviator() {
         borderRadius={'6px'}
         width={'100%'}
       >
+        <Board cells={cells} />
         <Grid container borderBottom={'1px double #fff'} pb={2}>
           <Grid
             item
@@ -103,13 +147,7 @@ export function Aviator() {
             >
               ULTIMO SINAL
             </Typography>
-            <Typography fontWeight={700}>
-              {countdown > 0
-                ? `PROXIMO SINAL EM: ${countdown}`
-                : hasGenerated
-                ? 'SINAL IDENTIFICADO'
-                : 'AGUARDANDO ENTRADA...'}
-            </Typography>
+            <Typography fontWeight={700}>AGUARDANDO ENTRADA...</Typography>
           </Grid>
           <Grid item textAlign={'center'} lg={4} md={4}>
             <Box
@@ -124,7 +162,7 @@ export function Aviator() {
                 fontSize={'0.6rem'}
                 pb={2}
               >
-                PROTEÇÕES
+                MINAS NO JOGO
               </Typography>
               <Typography
                 lineHeight={0}
@@ -132,7 +170,7 @@ export function Aviator() {
                 fontWeight={700}
                 color={'primary.main'}
               >
-                {signalText || '--'}
+                03
               </Typography>
             </Box>
           </Grid>
@@ -149,7 +187,7 @@ export function Aviator() {
                 fontSize={'0.6rem'}
                 pb={2}
               >
-                Saída
+                N° DE TENTATIVAS
               </Typography>
               <Typography
                 lineHeight={0}
@@ -157,7 +195,7 @@ export function Aviator() {
                 fontWeight={700}
                 color={'primary.main'}
               >
-                {signalText2 || '--'}
+                03
               </Typography>
             </Box>
           </Grid>
@@ -182,7 +220,7 @@ export function Aviator() {
                 fontWeight={700}
                 color={'primary.main'}
               >
-                {signalTime || '--'}
+                {validUntil}
               </Typography>
             </Box>
           </Grid>
@@ -198,13 +236,13 @@ export function Aviator() {
       </Box>
       <Box maxWidth={'700px'} mt={2} width={'100%'} display={'flex'} gap={2}>
         <Button
-          onClick={iniciarContagem}
+          onClick={handleSubmitAction}
           fullWidth
           variant="contained"
           size="large"
         >
           <Typography p={2} fontWeight={700} fontSize={'0.8rem'}>
-            Identificar sinal
+            {countdown}
           </Typography>
         </Button>
         <Button fullWidth variant="contained" size="large" color="secondary">

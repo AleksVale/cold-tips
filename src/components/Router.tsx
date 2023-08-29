@@ -6,6 +6,7 @@ import { InstallAndroid } from '../Pages/android'
 import { InstallIos } from '../Pages/ios'
 import { BonusPage } from '../Pages/bonus'
 import { Aviator } from '../Pages/aviator'
+import { Mines } from '../Pages/mines'
 
 export function Router() {
   return (
@@ -17,6 +18,7 @@ export function Router() {
         <Route path="/ios" element={<InstallIos />} />
         <Route path="/bonus" element={<BonusPage />} />
         <Route path="/aviator" element={<Aviator />} />
+        <Route path="/mines" element={<Mines />} />
       </Route>
     </Routes>
   )
