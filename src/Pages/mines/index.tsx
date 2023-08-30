@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Board, Cell } from '../../components/board'
 import empty from '../../assets/empty.webp'
 import updated from '../../assets/updated.webp'
+import { IframeGnome } from '../../components/iframe'
 
 export function Mines() {
   const [peopleCount, setPeopleCount] = useState(getRandomNumber())
@@ -116,7 +117,7 @@ export function Mines() {
     >
       <Box
         maxWidth={'700px'}
-        bgcolor={' rgba(255, 255, 255, 0.11)'}
+        bgcolor={'background.default'}
         mt={8}
         p={2}
         display={'flex'}
@@ -137,7 +138,7 @@ export function Mines() {
             textAlign={'center'}
             p={2}
             borderRadius={'6px'}
-            bgcolor={'rgba(255,255,255,.05)'}
+            bgcolor={'background.paper'}
             mb={2}
           >
             <Typography
@@ -150,12 +151,7 @@ export function Mines() {
             <Typography fontWeight={700}>AGUARDANDO ENTRADA...</Typography>
           </Grid>
           <Grid item textAlign={'center'} lg={4} md={4}>
-            <Box
-              borderRadius={'6px'}
-              bgcolor={'rgba(255,255,255,.05)'}
-              p={3}
-              mx={1}
-            >
+            <Box borderRadius={'6px'} bgcolor={'background.paper'} p={3} mx={1}>
               <Typography
                 color={'text.disabled'}
                 fontWeight={700}
@@ -175,12 +171,7 @@ export function Mines() {
             </Box>
           </Grid>
           <Grid item textAlign={'center'} lg={4} md={4}>
-            <Box
-              borderRadius={'6px'}
-              bgcolor={'rgba(255,255,255,.05)'}
-              p={3}
-              mx={1}
-            >
+            <Box borderRadius={'6px'} bgcolor={'background.paper'} p={3} mx={1}>
               <Typography
                 color={'text.disabled'}
                 fontWeight={700}
@@ -200,12 +191,7 @@ export function Mines() {
             </Box>
           </Grid>
           <Grid item textAlign={'center'} lg={4} md={4}>
-            <Box
-              borderRadius={'6px'}
-              bgcolor={'rgba(255,255,255,.05)'}
-              p={3}
-              mx={1}
-            >
+            <Box borderRadius={'6px'} bgcolor={'background.paper'} p={3} mx={1}>
               <Typography
                 color={'text.disabled'}
                 fontWeight={700}
@@ -251,6 +237,7 @@ export function Mines() {
           </Typography>
         </Button>
       </Box>
+      <IframeGnome />
     </Box>
   )
 }

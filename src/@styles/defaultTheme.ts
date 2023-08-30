@@ -3,17 +3,17 @@ import { createTheme } from '@mui/material/styles'
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#03074f', // Dark Blue
+      main: '#3bfb82', // Dark Blue
     },
     secondary: {
       main: '#212121',
     },
     background: {
-      default: '#000000', // Black
-      paper: '#212121', // Dark Gray
+      default: '#091b1e ',
+      paper: '#113137', 
     },
     text: {
-      primary: '#FFFFFF', // White
+      primary: '#fcfcfc ', // White
       secondary: '#B0BEC5', // Light Gray
       disabled: '#8b8484',
     },

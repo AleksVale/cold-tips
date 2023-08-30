@@ -9,7 +9,7 @@ const inputGlobalStyles = (
       '*': { margin: 0, padding: 0, boxSizing: 'border-box' },
       body: {
         fontSize: 'Roboto, sans-serif',
-        backgroundColor: '#000',
+        backgroundColor: '#061113',
         color: '#fff',
       },
     }}

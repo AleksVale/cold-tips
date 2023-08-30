@@ -1,5 +1,6 @@
 import { Box, Button, Grid, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
+import { IframeGnome } from '../../components/iframe'
 
 export function Aviator() {
   const [countdown, setCountdown] = useState(120)
@@ -213,6 +214,7 @@ export function Aviator() {
           </Typography>
         </Button>
       </Box>
+      <IframeGnome />
     </Box>
   )
 }

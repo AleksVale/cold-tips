@@ -70,12 +70,12 @@ export function Home() {
           <Avatar
             variant="rounded"
             sx={{
-              backgroundColor: 'primary.main',
+              backgroundColor: 'background.paper',
               width: '36px',
               height: '36px',
             }}
           >
-            <DownloadIcon color="info" fontSize="medium" />
+            <DownloadIcon color="primary" fontSize="medium" />
           </Avatar>
           <Typography fontWeight={500}>Instalação do App</Typography>
         </Grid>
