@@ -53,8 +53,11 @@ export function Mines() {
       updatedIndexes.add(index)
     }
     const newCells = cells.map((cell, index) =>
-      updatedIndexes.has(index) ? { index, imageSrc: updated } : cell,
+      updatedIndexes.has(index)
+        ? { index, imageSrc: updated }
+        : { index, imageSrc: empty },
     )
+    console.log(newCells)
     setCells(newCells)
   }
 
@@ -77,7 +80,6 @@ export function Mines() {
 
       if (minutos === 0 && segundos === 0) {
         clearInterval(countdownInterval)
-        resetGame()
         setCountdown('Identificar sinal')
       }
     }, 1000)
@@ -94,7 +96,10 @@ export function Mines() {
     if (countdown !== 'Identificar sinal') return
     startCountdown()
     resetGame()
-    updateImages()
+
+    setTimeout(() => {
+      updateImages()
+    }, 500)
   }
 
   useEffect(() => {

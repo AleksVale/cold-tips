@@ -2,17 +2,23 @@ import { useState } from 'react'
 import { TextField, Button, Container, Typography, Box } from '@mui/material'
 import { AccountCircle } from '@mui/icons-material'
 import { LoginService } from '../../services/login.service'
+import { useAuth } from '../../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 export const LoginPage = () => {
+  const { token, login } = useAuth()
+  console.log(token)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate()
 
   const handleLogin = () => {
     const data = {
       email,
       password,
     }
-    LoginService.login(data)
+    login('aleksaleks')
+    navigate('/')
     console.log('Login clicked')
   }
 

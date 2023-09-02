@@ -3,6 +3,7 @@ import theme from './@styles/defaultTheme'
 import { Router } from './components/Router'
 import GlobalStyles from '@mui/material/GlobalStyles'
 import { ThemeProvider } from '@mui/material'
+import { AuthProvider } from './context/AuthContext'
 const inputGlobalStyles = (
   <GlobalStyles
     styles={{
@@ -19,10 +20,12 @@ const inputGlobalStyles = (
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        {inputGlobalStyles}
-        <Router />
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          {inputGlobalStyles}
+          <Router />
+        </BrowserRouter>
+      </AuthProvider>
     </ThemeProvider>
   )
 }

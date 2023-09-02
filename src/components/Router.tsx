@@ -1,4 +1,5 @@
-import { Route, Routes } from 'react-router-dom'
+import React from 'react'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { Home } from '../Pages/home'
 import { DefaultLayout } from '../layouts/DefaultLayout'
 import { Menu } from '../Pages/menu'
@@ -13,13 +14,14 @@ export function Router() {
   return (
     <Routes>
       <Route path="/" element={<DefaultLayout />}>
-        <Route path="/" element={<Home />} />
+        <Route index element={<Home />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/android" element={<InstallAndroid />} />
         <Route path="/ios" element={<InstallIos />} />
         <Route path="/bonus" element={<BonusPage />} />
         <Route path="/aviator" element={<Aviator />} />
         <Route path="/mines" element={<Mines />} />
+        <Route path="/spaceman" element={<Aviator />} />
       </Route>
       <Route path="login" element={<LoginPage />} />
     </Routes>
